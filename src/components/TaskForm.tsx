@@ -13,17 +13,22 @@ interface TaskFormProps {
 }
 
 const TaskForm: React.FC<TaskFormProps> = ({ isOpen, onRequestClose }) => {
+  const [message, setMessage] = useState('');
   const tasks = useSelector(tasksSelector);
   const [newTask, setNewTask] = useState<string>('');
   const dispatch = useDispatch();
 
   const handleAddTask = (e: any) => {
     e.preventDefault()
-    if (newTask.trim() !== '') {
-      dispatch(addTasks({ id: tasks.length + 1, description: newTask }));
-      setNewTask('');
-      onRequestClose();
+    if (newTask.trim() === '') {
+      setMessage('no puede anadir una tarea vacia')
+      return;
     }
+
+    dispatch(addTasks({ id: tasks.length + 1, description: newTask }));
+    setNewTask('');
+    onRequestClose();
+
   };
 
   return (
@@ -37,12 +42,16 @@ const TaskForm: React.FC<TaskFormProps> = ({ isOpen, onRequestClose }) => {
         <input
           type="text"
           value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
+          onChange={(e) => {
+            setNewTask(e.target.value);
+            setMessage('')
+          }}
           placeholder="Ingrese la descripción del task"
         />
         <button type="submit">Agregar Task</button>
         <button type="button" onClick={onRequestClose}>Cancelar</button>
       </form>
+      {message && (<span>{message}</span>)}
     </Modal>
   );
 };

@@ -17,7 +17,7 @@ const TasksScreen: React.FC = () => {
 
   return (
     <div>
-      <button onClick={openModal}>Agregar Nueva Tarea</button>
+      <button onClick={openModal}>agregar nuevo task</button>
       <TaskList />
       <Link to="/">Volver a la pantalla principal</Link>
       <TaskForm
