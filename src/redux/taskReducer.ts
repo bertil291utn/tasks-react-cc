@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { Task } from '../interfaces/Task'
 
 export interface TaskState {
-  tasks: []
+  tasks: Array<Task>
 }
 
 const initialState: TaskState = {
