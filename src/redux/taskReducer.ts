@@ -6,13 +6,13 @@ export interface TaskState {
   tasks: Array<Task>
 }
 
-const initialState: TaskState = {
+export const TaskInitialState: TaskState = {
   tasks: [],
 }
 
 export const TasksSlice = createSlice({
   name: 'task',
-  initialState,
+  initialState: TaskInitialState,
   reducers: {
     initialSetTasks: (store, { payload }: PayloadAction<[]>) => {
       store.tasks = payload

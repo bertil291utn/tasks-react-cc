@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import { List } from '../interfaces/List'
 import axios from 'axios';
 
 export interface listState {
   lists: Array<List>
-  isLoading:  'idle' | 'pending' | 'succeeded' | 'failed';
+  isLoading: 'idle' | 'pending' | 'succeeded' | 'failed';
   error: string | null;
 }
 
@@ -27,7 +26,7 @@ export const fetchElements = createAsyncThunk('lists/fetchElements', async () =>
 export const listsSlice = createSlice({
   name: 'list',
   initialState,
-  reducers:{},
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchElements.pending, (state) => {
