@@ -13,7 +13,6 @@ const Lists: React.FC = () => {
 
   return (
     <div>
-      <h2>Lista de Elementos</h2>
       {lists.map((list) => (
         <List
           key={`list-${list.id}`}

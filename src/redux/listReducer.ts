@@ -28,14 +28,6 @@ export const listsSlice = createSlice({
   name: 'list',
   initialState,
   reducers:{},
-  // reducers: {
-  //   initialSetlists: (store, { payload }: PayloadAction<[]>) => {
-  //     store.lists = payload
-  //   },
-  //   setIsLoading: (store, { payload }: PayloadAction<boolean>) => {
-  //     store.isLoading = payload
-  //   },
-  // },
   extraReducers: (builder) => {
     builder
       .addCase(fetchElements.pending, (state) => {
@@ -52,7 +44,6 @@ export const listsSlice = createSlice({
   },
 })
 
-// export const { initialSetlists,setIsLoading } = listsSlice.actions
 
 
 export default listsSlice.reducer

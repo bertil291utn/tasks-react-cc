@@ -15,7 +15,6 @@ const ListadoScreen: React.FC = () => {
 
   return (
     <div>
-      <h1>Pantalla de Listado</h1>
       {IsLoading === 'pending'  ? <div>Cargando...</div> : <Lists />}
     </div>
   );
