@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { List } from '../interfaces/List'
-import axios from 'axios';
 
 export interface listState {
   lists: Array<List>
@@ -16,8 +15,8 @@ const initialState: listState = {
 
 export const fetchElements = createAsyncThunk('lists/fetchElements', async () => {
   try {
-    const response = await axios('https://6172cfe5110a740017222e2b.mockapi.io/elements');
-    return response.data;
+    const response = await fetch('https://6172cfe5110a740017222e2b.mockapi.io/elements');
+    return await response.json();
   } catch (error) {
     throw error;
   }

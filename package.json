@@ -2,9 +2,9 @@
   "name": "tasks-cc",
   "version": "0.1.0",
   "private": true,
+  "type":"module",
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
-    "axios": "^1.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
