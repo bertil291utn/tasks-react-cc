@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 const Lists: React.FC = () => {
   const lists = useSelector(listSelector); 
 
-  if (!lists) {
-    return <LoadingSpinner />;
-  }
+  // if (!lists) {
+  //   return <LoadingSpinner />;
+  // }
 
   return (
     <div>

@@ -1,6 +1,6 @@
 
 const LoadingSpinner: React.FC = () => {
-  return <div>Cargando...</div>; 
+  return <div>Loading...</div>; 
 };
 
 export default LoadingSpinner;
