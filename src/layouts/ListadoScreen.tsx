@@ -17,7 +17,7 @@ const ListadoScreen: React.FC = () => {
 
   return (
     <div>
-      {IsLoading !== 'pending' ? <LoadingSpinner /> : <Lists />}
+      {IsLoading === 'pending' ? <LoadingSpinner /> : <Lists />}
     </div>
   );
 };
