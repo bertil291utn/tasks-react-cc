@@ -8,7 +8,6 @@ const TaskList: React.FC = () => {
 
   return (
     <div>
-      <h2>Lista de Tasks</h2>
       {tasks.map((task) => (
         <Task key={`task-${task.id}`} description={task.description} />
       ))}
