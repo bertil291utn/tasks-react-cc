@@ -17,7 +17,8 @@ const TaskForm: React.FC<TaskFormProps> = ({ isOpen, onRequestClose }) => {
   const [newTask, setNewTask] = useState<string>('');
   const dispatch = useDispatch();
 
-  const handleAddTask = () => {
+  const handleAddTask = (e: any) => {
+    e.preventDefault()
     if (newTask.trim() !== '') {
       dispatch(addTasks({ id: tasks.length + 1, description: newTask }));
       setNewTask('');
@@ -31,7 +32,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ isOpen, onRequestClose }) => {
       onRequestClose={onRequestClose}
       contentLabel="Crear Nueva Tarea"
     >
-      <div>
+      <form onSubmit={handleAddTask}>
         <h2>Agregar Nuevo Task</h2>
         <input
           type="text"
@@ -39,9 +40,9 @@ const TaskForm: React.FC<TaskFormProps> = ({ isOpen, onRequestClose }) => {
           onChange={(e) => setNewTask(e.target.value)}
           placeholder="Ingrese la descripción del task"
         />
-        <button onClick={handleAddTask}>Agregar Task</button>
-        <button onClick={onRequestClose}>Cancelar</button>
-      </div>
+        <button type="submit">Agregar Task</button>
+        <button type="button" onClick={onRequestClose}>Cancelar</button>
+      </form>
     </Modal>
   );
 };
