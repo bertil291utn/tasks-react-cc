@@ -3,16 +3,13 @@ import { useDispatch } from 'react-redux';
 import { addTasks } from '../redux/taskReducer';
 import { useSelector } from 'react-redux';
 import { tasksSelector } from '../redux/selectors';
-import Modal from 'react-modal';
 
-Modal.setAppElement('#root');
 
 interface TaskFormProps {
-  isOpen: boolean;
   onRequestClose: () => void;
 }
 
-const TaskForm: React.FC<TaskFormProps> = ({ isOpen, onRequestClose }) => {
+const TaskForm: React.FC<TaskFormProps> = ({ onRequestClose }) => {
   const [message, setMessage] = useState('');
   const tasks = useSelector(tasksSelector);
   const [newTask, setNewTask] = useState<string>('');
@@ -32,11 +29,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ isOpen, onRequestClose }) => {
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      contentLabel="Crear Nueva Tarea"
-    >
+    <>
       <form onSubmit={handleAddTask}>
         <h2>Agregar Nuevo Task</h2>
         <input
@@ -52,7 +45,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ isOpen, onRequestClose }) => {
         <button type="button" onClick={onRequestClose}>Cancelar</button>
       </form>
       {message && (<span>{message}</span>)}
-    </Modal>
+    </>
   );
 };
 
