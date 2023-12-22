@@ -39,6 +39,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onRequestClose }) => {
             setNewTask(e.target.value);
             setMessage('')
           }}
+          data-testid="task-description"
           placeholder="Ingrese la descripción del task"
         />
         <button type="submit">Agregar Task</button>

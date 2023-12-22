@@ -1,10 +1,14 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, getByTestId } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import TasksScreen from '../layouts/TasksScreen';
-import { addTasks } from '../redux/taskReducer';
+import taskReducer, { addTasks } from '../redux/taskReducer';
+import configureStore from 'redux-mock-store';
 
+
+const mockStore = configureStore();
+const _store = mockStore({ task: { tasks: [] } });
 
 describe('TasksScreen Component', () => {
   test('renders tasks list from Redux store', () => {
@@ -20,6 +24,34 @@ describe('TasksScreen Component', () => {
 
     expect(screen.getByText('Tarea 1')).toBeInTheDocument();
   });
+
+  test('adds new task to Redux store on button click', async () => {
+
+
+
+    render(
+      <Provider store={_store as any}>
+        <Router>
+          <TasksScreen />
+        </Router>
+      </Provider>
+    )
+
+    fireEvent.click(screen.getByText('agregar nuevo task'));
+    await waitFor(() => {
+      expect(screen.getByText('Agregar Nuevo Task')).toBeInTheDocument();
+    });
+    const inputElement = screen.getByTestId('task-description');
+    fireEvent.change(inputElement, { target: { value: 'New Task Description' } });
+
+    fireEvent.click(screen.getByText('Agregar Task'));
+
+    await waitFor(() => {
+      expect(_store.getActions()).toEqual([{ type: 'task/addTasks', payload: { id: 1, description: 'New Task Description' } }]);
+    });
+
+
+  });
 })
 
 
@@ -27,9 +59,3 @@ describe('TasksScreen Component', () => {
 
 
 
-
-// test('Devuelve un listado de las tareas guardadas en redux', () => {
-//   const INITIAL_STATE = { id: 1, description: "Tarea 1" }
-//   const resp = reducer(TaskInitialState, addTasks(INITIAL_STATE));
-//   expect(resp.tasks).toEqual([INITIAL_STATE])
-// })
