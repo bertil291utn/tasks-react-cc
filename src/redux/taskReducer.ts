@@ -17,8 +17,8 @@ export const TasksSlice = createSlice({
     initialSetTasks: (store, { payload }: PayloadAction<[]>) => {
       store.tasks = payload
     },
-    addTasks: (store, { payload }: PayloadAction<[]>) => {
-      store.tasks = [...store.tasks, ...payload]
+    addTasks: (store, { payload }: PayloadAction<Task>) => {
+      store.tasks = [...store.tasks, payload]
 
     },
   },
