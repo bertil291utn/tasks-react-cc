@@ -9,15 +9,19 @@ import LoadingSpinner from '../components/LoadingSpinner';
 const ListadoScreen: React.FC = () => {
   const dispatch = useDispatch();
   const IsLoading = useSelector(isLoadingListSelector);
-  
+
   useEffect(() => {
-    /* hacer el fetch de datos sin importar si ya tiene los datos alamcenados en memoria */ 
+    /* hacer el fetch de datos sin importar si ya tiene los datos alamcenados en memoria */
     dispatch(fetchElements() as any);
   }, [dispatch]);
 
   return (
     <div>
-      {IsLoading === 'pending' ? <LoadingSpinner /> : <Lists />}
+      {IsLoading === 'pending' ? <LoadingSpinner /> :
+        <div data-testid="lists-name">
+          <Lists />
+        </div>
+      }
     </div>
   );
 };
