@@ -1,22 +1,25 @@
 # Getting Started with Create React App
 
-1. Clone project 
+### 1. Clone project 
 ```
 git clone https://github.com/bertil291utn/tasks-react-cc.git
 ```
-2. Open with an IDE
-3. In a terminal running inside `tasks-react-cc` directory, install all dependencies
+### 2. Open with an IDE
+### 3. In a terminal running inside `tasks-react-cc` directory, install all dependencies
 ```
 yarn 
 ```
 ```
 npm i
 ```
-4. To start (use yarn or npm or whatever you're used to)
+### 4. To start (use yarn or npm or whatever you're used to)
 ```
 yarn start
 ```
-5. To test (All tests on [__tests__](./src/__tests__) folder) 
+    
+  - 4.1 Or [Live version](https://tasks-react-cc.vercel.app/)
+
+### 5. To test (All tests on [__tests__](./src/__tests__) folder) 
 ```
 yarn test
 ```
