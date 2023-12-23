@@ -1,5 +1,29 @@
 # Getting Started with Create React App
 
+1. Clone project 
+```
+git clone https://github.com/bertil291utn/tasks-react-cc.git
+```
+2. Open with an IDE
+3. In a terminal running inside `tasks-react-cc` directory, install all dependencies
+```
+yarn 
+```
+```
+npm i
+```
+4. To start (use yarn or npm or whatever you're used to)
+```
+yarn start
+```
+5. To test (All tests on [__tests__](./src/__tests__) folder) 
+```
+yarn test
+```
+
+<img width="1127" alt="Screenshot 2023-12-22 at 10 07 58 PM" src="https://github.com/bertil291utn/tasks-react-cc/assets/24902525/9b0b7bc4-e7ba-48e5-84d5-8ce8b9750267">
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

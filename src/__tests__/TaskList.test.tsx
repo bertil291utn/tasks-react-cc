@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter as Router, Route, Routes } from 'react-router-dom';
 import TasksScreen from '../layouts/TasksScreen';
-import TaskForm from './TaskForm';
+import TaskForm from '../components/TaskForm';
 import Home from '../layouts/Home';
 import  { addTasks } from '../redux/taskReducer';
 import { createStore, resetStore } from '../utils/MStore';

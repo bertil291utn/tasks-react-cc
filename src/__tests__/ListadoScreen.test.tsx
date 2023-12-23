@@ -3,9 +3,9 @@ import { render, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { createStore, resetStore } from '../utils/MStore';
-import ListadoScreen from './ListadoScreen';
 import { MemoryRouter as Router } from 'react-router-dom';
 
+import ListadoScreen from '../layouts/ListadoScreen';
 import { fetchElements } from '../redux/listReducer';
 
 
