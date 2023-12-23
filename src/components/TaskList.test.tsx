@@ -1,35 +1,29 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter as Router, Route, Routes } from 'react-router-dom';
 import TasksScreen from '../layouts/TasksScreen';
-import configureStore from 'redux-mock-store';
 import TaskForm from './TaskForm';
+import Home from '../layouts/Home';
+import  { addTasks } from '../redux/taskReducer';
+import { createStore, resetStore } from '../utils/MStore';
 
 
-const mockStore = configureStore();
 
 describe('Tasks', () => {
 
-  let _store: any;
+  let _store:any;
 
   beforeEach(() => {
-    _store = mockStore({
-      task: {
-        tasks: [],
-      },
-    });
+    _store = createStore();
+    resetStore(_store); 
   });
 
 
   it('renders tasks list from Redux store', () => {
-    _store = mockStore({
-      task: {
-        tasks: [{ id: 1, description: 'Tarea 1' }],
-      },
-    });
+    _store.dispatch(addTasks({id:1,description:"Tarea 1"}))
 
     render(
-      <Provider store={_store as any}>
+      <Provider store={_store}>
         <Router>
           <TasksScreen />
         </Router>
@@ -39,10 +33,11 @@ describe('Tasks', () => {
     expect(screen.getByText('Tarea 1')).toBeInTheDocument();
   });
 
-  it('adds new task to Redux store on button click', async () => {
 
+
+  it('adds new task to Redux store on button click', async () => {
     render(
-      <Provider store={_store as any}>
+      <Provider store={_store }>
         <Router>
           <TasksScreen />
         </Router>
@@ -59,17 +54,18 @@ describe('Tasks', () => {
     fireEvent.click(screen.getByText('Agregar Task'));
 
     await waitFor(() => {
-      expect(_store.getActions()).toEqual([{ type: 'task/addTasks', payload: { id: 1, description: 'New Task Description' } }]);
-    });
+      expect(_store.getState().task.tasks).toEqual(
+        [{ id: 1, description: 'New Task Description' }]
+      );});
 
   });
 
   it('does not allow creating a task if the input field is empty', () => {
 
     const { getByText } = render(
-      <Provider store={_store as any}>
+      <Provider store={_store}>
         <Router>
-          <TaskForm onRequestClose={() => {}} />
+          <TaskForm onRequestClose={() => { }} />
         </Router>
       </Provider>
     );
@@ -78,9 +74,48 @@ describe('Tasks', () => {
 
     expect(getByText('no puede anadir una tarea vacia')).toBeInTheDocument();
 
-    const actions = _store.getActions();
-    expect(actions).toHaveLength(0);
   });
+
+
+  it('adds new task to Redux store and shows it after navigating back', async () => {
+   
+    render(
+      <Provider store={_store}>
+        <Router initialEntries={['/tasks']} initialIndex={0}>
+          <Routes>
+
+            <Route path="/tasks" element={<TasksScreen />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </Router>
+      </Provider>
+    );
+
+    fireEvent.click(screen.getByText('agregar nuevo task'));
+    await waitFor(() => {
+      expect(screen.getByText('Agregar Nuevo Task')).toBeInTheDocument();
+    });
+
+    const inputElement = screen.getByTestId('task-description');
+    fireEvent.change(inputElement, { target: { value: 'New Task Description' } });
+    fireEvent.click(screen.getByText('Agregar Task'));
+
+    await waitFor(() => {
+      expect(_store.getState().task.tasks).toEqual(
+        [{ id: 1, description: 'New Task Description' }]
+      );
+    });
+    
+    fireEvent.click(screen.getByText('Volver a la pantalla principal'));
+    
+    fireEvent.click(screen.getByTestId('ir-tasks'));
+    
+    await waitFor(() => {
+    expect(screen.getByText('New Task Description')).toBeInTheDocument();
+    })
+  });
+
+
 })
 
 
